@@ -11,7 +11,7 @@ from pptx.util import Inches, Pt
 from pptx.enum.shapes import MSO_SHAPE, PP_PLACEHOLDER_TYPE
 from pptx.enum.text import MSO_AUTO_SIZE, PP_ALIGN
 
-genai.configure(api_key="AIzaSyCkhRoJqD0EJXtW28-JKoKBuIQdS_f_IfI")
+genai.configure(api_key="XXXXX")
 
 TEMPLATE_PATH = "template.pptx"
 TITLE_SLIDE_LAYOUT_NAME = "My Title Slide"
