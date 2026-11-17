@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SlideGen: AI presentations with sources</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>SlideGen</h1>
+    <p class="sub">Researched, cited, editable PowerPoint decks. You approve the outline, the AI writes and designs the slides.</p>
+    <ol class="steps"><li id="s1" class="on">1 Topic</li><li id="s2">2 Outline</li><li id="s3">3 Slides</li></ol>
+  </header>
+
+  <!-- Step 1 -->
+  <section id="step1" class="card">
+    <form id="plan-form">
+      <label>Topic<input id="topic" required minlength="3" maxlength="200" placeholder="e.g. Climate change: evidence and action"></label>
+      <div class="row3">
+        <label>Audience<input id="audience" value="general audience" maxlength="120"></label>
+        <label>Tone<input id="tone" value="clear and professional" maxlength="80"></label>
+        <label>Content slides<input id="n" type="number" min="3" max="15" value="8"></label>
+      </div>
+      <div class="row">
+        <label class="inline"><input id="research" type="checkbox" checked> Research the web for sources</label>
+        <button class="primary" type="submit">Plan outline →</button>
+      </div>
+      <p class="hint">No API key? Try <button type="button" class="link" id="demo">the offline demo</button>.</p>
+    </form>
+  </section>
+
+  <!-- Step 2 -->
+  <section id="step2" class="card" hidden>
+    <div class="row"><h2 id="deck-title"></h2><span class="pill" id="provider"></span></div>
+    <p class="hint">Edit titles, change slide types, reorder or delete slides. The AI follows this plan exactly.</p>
+    <div id="outline"></div>
+    <button type="button" class="ghost" id="add">+ Add slide</button>
+    <details id="sources-box"><summary id="sources-sum"></summary><ol id="sources"></ol></details>
+    <div class="row">
+      <div class="inline">
+        <label class="inline">Theme
+          <select id="theme">{% for t in themes %}<option>{{ t }}</option>{% endfor %}</select></label>
+        <label class="inline"><input id="images" type="checkbox" checked> Photos</label>
+      </div>
+      <button class="primary" id="build">Generate slides →</button>
+    </div>
+  </section>
+
+  <!-- Step 3 -->
+  <section id="step3" class="card" hidden>
+    <ul id="log" class="log"></ul>
+    <div id="done" hidden>
+      <div class="row"><h2 id="final-title"></h2><a id="download" class="primary btn">Download .pptx</a></div>
+      <div id="previews" class="previews"></div>
+      <h3>Quality report</h3>
+      <div id="report" class="report"></div>
+      <button type="button" class="ghost" id="restart">Make another deck</button>
+    </div>
+  </section>
+
+  <p id="error" class="error" hidden></p>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

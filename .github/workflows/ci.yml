@@ -1,0 +1,25 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Carlito font (Calibri metrics for text fitting)
+        run: sudo apt-get update && sudo apt-get install -y fonts-crosextra-carlito
+      - run: pip install -r requirements-dev.txt
+      - run: pytest -q
+      - name: Build the demo deck
+        run: python -m slidegen "Climate change" --provider demo --no-images -o demo.pptx
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo-deck
+          path: demo.pptx
